@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خطة المحارب المناوب | Warrior Nurse Plan</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0f172a',
+                        card: '#1e293b',
+                        neonOrange: '#f97316',
+                        neonGreen: '#10b981',
+                        neonBlue: '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f97316; 
+        }
+
+        /* Animations */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(249, 115, 22, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.5); }
+        }
+        .glow-effect {
+            animation: pulse-glow 2s infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #f97316, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <nav class="w-full bg-card/80 backdrop-blur-md border-b border-slate-700 fixed top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold text-neonOrange flex items-center gap-2">
+                <i class="fa-solid fa-heart-pulse"></i> المحارب المناوب
+            </div>
+            <div class="flex gap-3 items-center">
+                <div id="current-week-display" class="hidden md:block text-sm font-bold text-slate-300 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
+                    جاري التحميل...
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-16 px-4 text-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-64 h-64 bg-neonOrange/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-neonBlue/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+
+        <div class="relative z-10 container mx-auto max-w-4xl">
+            <span class="inline-block py-1 px-3 rounded-full bg-slate-800 border border-slate-700 text-neonOrange text-sm font-semibold mb-4">
+                تحدي الـ 40 أسبوع (280 يوم)
+            </span>
+            <h1 class="text-5xl md:text-7xl font-black mb-4 leading-tight">
+                من <span class="text-slate-500 decoration-red-500 decoration-4 line-through">131 كجم</span> إلى <span class="gradient-text">90 كجم</span>
+            </h1>
+            <p class="text-xl text-slate-400 mb-6 max-w-2xl mx-auto">
+                خطة مصممة خصيصاً لتمريض الشيفتات. التزام حديدي، أكل بيت، وتمرين منزلي ذكي.
+            </p>
+            
+            <div class="mb-10 flex justify-center items-center gap-2 text-sm text-slate-500 bg-slate-900/50 w-fit mx-auto px-4 py-2 rounded-full border border-slate-800">
+                <i class="fa-regular fa-calendar-check text-neonGreen"></i>
+                <span>بداية التحدي: السبت 22/11/2025</span>
+            </div>
+
+            <div class="grid grid-cols-3 md:grid-cols-5 gap-3 max-w-4xl mx-auto mb-8">
+                <div class="bg-card border border-slate-700 p-3 rounded-xl glow-effect relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-neonOrange"></div>
+                    <div id="weeks" class="text-3xl md:text-4xl font-bold text-white">40</div>
+                    <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest">أسبوع متبقي</div>
+                </div>
+                
+                <div class="bg-card border border-slate-700 p-3 rounded-xl">
+                    <div id="days" class="text-3xl md:text-4xl font-bold text-white">00</div>
+                    <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest">يوم</div>
+                </div>
+
+                <div class="bg-card border border-slate-700 p-3 rounded-xl">
+                    <div id="hours" class="text-3xl md:text-4xl font-bold text-white">00</div>
+                    <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest">ساعة</div>
+                </div>
+
+                <div class="bg-card border border-slate-700 p-3 rounded-xl">
+                    <div id="minutes" class="text-3xl md:text-4xl font-bold text-white">00</div>
+                    <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest">دقيقة</div>
+                </div>
+
+                <div class="bg-card border border-slate-700 p-3 rounded-xl border-neonOrange/30">
+                    <div id="seconds" class="text-3xl md:text-4xl font-bold text-neonOrange font-mono">00</div>
+                    <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest">ثانية</div>
+                </div>
+            </div>
+
+            <div class="w-full bg-slate-800 rounded-full h-4 mb-2 overflow-hidden border border-slate-700 max-w-3xl mx-auto">
+                <div id="progress-bar" class="bg-neonOrange h-4 rounded-full transition-all duration-1000 shadow-[0_0_10px_#f97316]" style="width: 0%"></div>
+            </div>
+            <div class="flex justify-between text-xs text-slate-500 font-mono max-w-3xl mx-auto">
+                <span>البداية: 131 كجم</span>
+                <span id="progress-text" class="text-white">في انتظار الانطلاق...</span>
+                <span>الهدف: 90 كجم</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-16 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center text-white"><span class="text-neonOrange">#</span> القواعد الذهبية</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-card p-6 rounded-2xl border border-slate-700 hover:border-neonOrange transition-colors group">
+                    <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-4 text-neonOrange text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">اللانش بوكس إجباري</h3>
+                    <p class="text-slate-400 text-sm">عدوّك الأول هو أكل الشارع. أكل البيت (حتى لو دسم) أرحم 100 مرة.</p>
+                </div>
+                <div class="bg-card p-6 rounded-2xl border border-slate-700 hover:border-neonOrange transition-colors group">
+                    <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-4 text-neonOrange text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">أيام الشغل للراحة</h3>
+                    <p class="text-slate-400 text-sm">شيفت 12 ساعة = حرق. الرياضة في الـ 3 أيام الأجازة فقط وبشدة عالية.</p>
+                </div>
+                <div class="bg-card p-6 rounded-2xl border border-slate-700 hover:border-neonOrange transition-colors group">
+                    <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-4 text-neonOrange text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-egg"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">البروتين الفقير</h3>
+                    <p class="text-slate-400 text-sm">الاعتماد الكلي على: الفول، العدس، الجبنة القريش. اللحوم 3 مرات فقط.</p>
+                </div>
+                <div class="bg-card p-6 rounded-2xl border border-slate-700 hover:border-neonOrange transition-colors group">
+                    <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-4 text-neonOrange text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bottle-water"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">السوائل حياة</h3>
+                    <p class="text-slate-400 text-sm">الجفاف يسبب الجوع الوهمي. إزازة الماية لا تفارق يدك.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-slate-800 relative">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-2">جدول الأكل حسب الشيفت</h2>
+                <p class="text-slate-400">اضغط للتبديل بين شيفت الصباح والمساء</p>
+            </div>
+
+            <div class="flex justify-center mb-8 bg-slate-900 p-1 rounded-xl w-fit mx-auto border border-slate-700">
+                <button onclick="switchTab('morning')" id="tab-morning" class="px-6 py-2 rounded-lg text-sm font-bold transition-all bg-neonOrange text-white shadow-lg">
+                    <i class="fa-regular fa-sun ml-2"></i> شيفت صباحي
+                </button>
+                <button onclick="switchTab('night')" id="tab-night" class="px-6 py-2 rounded-lg text-sm font-bold text-slate-400 hover:text-white transition-all">
+                    <i class="fa-regular fa-moon ml-2"></i> شيفت سهر
+                </button>
+            </div>
+
+            <div id="content-morning" class="space-y-4 animate-fade-in">
+                <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-neonOrange">
+                    <div class="text-neonOrange font-mono font-bold text-lg min-w-[60px]">07:00</div>
+                    <div>
+                        <h4 class="font-bold text-white">الفطار في البيت</h4>
+                        <p class="text-slate-400 text-sm">نص رغيف + فول/جبنة + شاي (سكر خفيف).</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-yellow-500">
+                    <div class="text-yellow-500 font-mono font-bold text-lg min-w-[60px]">Work</div>
+                    <div>
+                        <h4 class="font-bold text-white">الغداء (اللانش بوكس)</h4>
+                        <p class="text-slate-400 text-sm">6 معالق رز/مكرونة + خضار مطبوخ + بروتين/بقوليات.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-blue-500">
+                    <div class="text-blue-500 font-mono font-bold text-lg min-w-[60px]">21:00</div>
+                    <div>
+                        <h4 class="font-bold text-white">العشاء</h4>
+                        <p class="text-slate-400 text-sm">زبادي أو جبنة قريش + سلطة (بدون عيش).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-night" class="space-y-4 hidden animate-fade-in">
+                <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-neonBlue">
+                    <div class="text-neonBlue font-mono font-bold text-lg min-w-[60px]">16:00</div>
+                    <div>
+                        <h4 class="font-bold text-white">الاستيقاظ والفطار</h4>
+                        <p class="text-slate-400 text-sm">نص رغيف + فول/جبنة + سلطة.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-neonOrange">
+                    <div class="text-neonOrange font-mono font-bold text-lg min-w-[60px]">19:00</div>
+                    <div>
+                        <h4 class="font-bold text-white">الغداء الرئيسي (البيت)</h4>
+                        <p class="text-slate-400 text-sm">الوجبة الكبيرة: رز/مكرونة + خضار + بروتين.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-purple-500">
+                    <div class="text-purple-500 font-mono font-bold text-lg min-w-[60px]">Work</div>
+                    <div>
+                        <h4 class="font-bold text-white">سناك نص الليل</h4>
+                        <p class="text-slate-400 text-sm"><span class="text-red-400 font-bold">ممنوع النشويات!</span> خضار مقطع، جبنة، أو بيض.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-green-500">
+                    <div class="text-green-500 font-mono font-bold text-lg min-w-[60px]">09:00</div>
+                    <div>
+                        <h4 class="font-bold text-white">قبل النوم</h4>
+                        <p class="text-slate-400 text-sm">زبادي أو ثمرة فاكهة -> نوم فوراً.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-slate-900">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold text-white">نظام التمرين المنزلي</h2>
+                    <p class="text-slate-400 mt-2">الأدوات: وزن الجسم، زجاجات مياه، شنطة كتب</p>
+                </div>
+                <div class="mt-4 md:mt-0 bg-red-500/20 text-red-400 border border-red-500/50 px-4 py-2 rounded-lg font-bold animate-pulse">
+                    <i class="fa-solid fa-calendar-xmark ml-2"></i> أيام الأجازة فقط
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-bold text-lg text-neonGreen">إحماء</h3>
+                        <i class="fa-solid fa-person-walking text-slate-500"></i>
+                    </div>
+                    <p class="text-white text-2xl font-bold">5 دقايق</p>
+                </div>
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-bold text-lg text-white">Squats (رجل)</h3>
+                        <i class="fa-solid fa-chair text-slate-500"></i>
+                    </div>
+                    <p class="text-neonOrange text-2xl font-bold">3 x 12</p>
+                </div>
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-bold text-lg text-white">Push-ups (صدر)</h3>
+                        <i class="fa-solid fa-hand-fist text-slate-500"></i>
+                    </div>
+                    <p class="text-neonOrange text-2xl font-bold">3 x Max</p>
+                </div>
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-bold text-lg text-white">Rows (ظهر)</h3>
+                        <i class="fa-solid fa-bottle-water text-slate-500"></i>
+                    </div>
+                    <p class="text-neonOrange text-2xl font-bold">3 x 15</p>
+                    <p class="text-slate-400 text-sm">باستخدام زجاجات المياه</p>
+                </div>
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-bold text-lg text-white">Lunges (أرداف)</h3>
+                        <i class="fa-solid fa-shoe-prints text-slate-500"></i>
+                    </div>
+                    <p class="text-neonOrange text-2xl font-bold">3 x 10</p>
+                    <p class="text-slate-400 text-sm">لكل رجل</p>
+                </div>
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-bold text-lg text-white">Plank (بطن)</h3>
+                        <i class="fa-solid fa-stopwatch text-slate-500"></i>
+                    </div>
+                    <p class="text-neonOrange text-2xl font-bold">3 x 20s</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-slate-800">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <h2 class="text-3xl font-bold mb-12 text-center">خارطة الطريق (40 أسبوع)</h2>
+            <div class="relative border-r-4 border-slate-700 mr-4 space-y-12">
+                <div class="relative pr-8">
+                    <div class="absolute -right-[22px] top-0 w-10 h-10 bg-slate-900 border-4 border-neonOrange rounded-full flex items-center justify-center text-neonOrange font-bold">1</div>
+                    <div class="bg-card p-6 rounded-xl border border-slate-700">
+                        <h3 class="text-xl font-bold text-white">المرحلة الأولى: التأسيس (الأسابيع 1-10)</h3>
+                        <p class="text-slate-400 mt-2">الهدف: خسارة 10-12 كجم. التركيز: منع أكل الشارع نهائياً والالتزام باللانش بوكس.</p>
+                    </div>
+                </div>
+                <div class="relative pr-8">
+                    <div class="absolute -right-[22px] top-0 w-10 h-10 bg-slate-900 border-4 border-slate-600 rounded-full flex items-center justify-center text-slate-400 font-bold">2</div>
+                    <div class="bg-card p-6 rounded-xl border border-slate-700 opacity-80">
+                        <h3 class="text-xl font-bold text-white">المرحلة الثانية: زيادة الحرق (الأسابيع 11-20)</h3>
+                        <p class="text-slate-400 mt-2">الهدف: خسارة 8-10 كجم. تقليل نشويات الغداء، زيادة شدة التمرين بالشنطة.</p>
+                    </div>
+                </div>
+                <div class="relative pr-8">
+                    <div class="absolute -right-[22px] top-0 w-10 h-10 bg-slate-900 border-4 border-slate-600 rounded-full flex items-center justify-center text-slate-400 font-bold">3</div>
+                    <div class="bg-card p-6 rounded-xl border border-slate-700 opacity-60">
+                        <h3 class="text-xl font-bold text-white">المرحلة الثالثة: كسر الثبات (الأسابيع 21-30)</h3>
+                        <p class="text-slate-400 mt-2">صيام متقطع + تمارين HIIT في الأجازات لكسر ثبات الوزن.</p>
+                    </div>
+                </div>
+                <div class="relative pr-8">
+                    <div class="absolute -right-[22px] top-0 w-10 h-10 bg-slate-900 border-4 border-slate-600 rounded-full flex items-center justify-center text-slate-400 font-bold">4</div>
+                    <div class="bg-card p-6 rounded-xl border border-slate-700 opacity-60">
+                        <h3 class="text-xl font-bold text-white">المرحلة الرابعة: النحت (الأسابيع 31-40)</h3>
+                        <p class="text-slate-400 mt-2">الوصول لـ 90 كجم. تقليل الملح، تمارين البطن المكثفة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 py-8 text-center border-t border-slate-800">
+        <div class="container mx-auto px-4">
+            <p class="text-slate-500 text-sm">
+                تذكر: اللانش بوكس سلاحك النووي.<br>
+                <span class="text-neonOrange font-bold mt-2 block">استمر يا بطل.</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Logic 1: Meal Plan Tabs ---
+        function switchTab(shiftType) {
+            const tabMorning = document.getElementById('tab-morning');
+            const tabNight = document.getElementById('tab-night');
+            const contentMorning = document.getElementById('content-morning');
+            const contentNight = document.getElementById('content-night');
+
+            if (shiftType === 'morning') {
+                tabMorning.classList.add('bg-neonOrange', 'text-white', 'shadow-lg');
+                tabMorning.classList.remove('text-slate-400');
+                tabNight.classList.remove('bg-neonOrange', 'text-white', 'shadow-lg');
+                tabNight.classList.add('text-slate-400');
+                contentMorning.classList.remove('hidden');
+                contentNight.classList.add('hidden');
+            } else {
+                tabNight.classList.add('bg-neonOrange', 'text-white', 'shadow-lg');
+                tabNight.classList.remove('text-slate-400');
+                tabMorning.classList.remove('bg-neonOrange', 'text-white', 'shadow-lg');
+                tabMorning.classList.add('text-slate-400');
+                contentNight.classList.remove('hidden');
+                contentMorning.classList.add('hidden');
+            }
+        }
+
+        // --- Logic 2: Fixed Date Countdown (Starts Nov 22, 2025) ---
+        
+        // CONFIG: Saturday, Nov 22, 2025 at 00:00:00
+        const START_DATE_STR = "2025-11-22T00:00:00"; 
+        const TOTAL_DAYS = 280; // 40 weeks
+
+        function initTimer() {
+            const startTime = new Date(START_DATE_STR).getTime();
+            const endTime = startTime + (TOTAL_DAYS * 24 * 60 * 60 * 1000);
+
+            const timerInterval = setInterval(function() {
+                const now = new Date().getTime();
+
+                // SCENARIO A: Challenge hasn't started yet (Pre-Launch)
+                if (now < startTime) {
+                    // Calculate time until start
+                    const timeUntilStart = startTime - now;
+                    const d = Math.floor(timeUntilStart / (1000 * 60 * 60 * 24));
+                    const h = Math.floor((timeUntilStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const m = Math.floor((timeUntilStart % (1000 * 60 * 60)) / (1000 * 60));
+                    const s = Math.floor((timeUntilStart % (1000 * 60)) / 1000);
+
+                    // Display "Waiting" state
+                    document.getElementById("weeks").innerText = "40"; // Full duration
+                    // Show countdown to START in the small boxes (optional) or just keep 00
+                    document.getElementById("days").innerText = d;
+                    document.getElementById("hours").innerText = h;
+                    document.getElementById("minutes").innerText = m;
+                    document.getElementById("seconds").innerText = s;
+                    
+                    document.getElementById("progress-bar").style.width = "0%";
+                    document.getElementById("progress-text").innerText = `يبدأ التحدي بعد ${d} يوم و ${h} ساعة`;
+                    
+                    const weekDisplay = document.getElementById('current-week-display');
+                    if(weekDisplay) {
+                        weekDisplay.classList.remove("text-neonGreen", "bg-green-900/20", "border-green-900");
+                        weekDisplay.classList.add("text-slate-300", "bg-slate-800", "border-slate-700");
+                        weekDisplay.innerText = "في انتظار الانطلاق...";
+                    }
+                    return;
+                }
+
+                // SCENARIO B: Challenge is running (or finished)
+                const distance = endTime - now;
+                const timeElapsed = now - startTime;
+
+                // 1. Countdown Logic
+                const weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
+                const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // 2. Current Week Logic
+                let currentWeek = Math.ceil(timeElapsed / (1000 * 60 * 60 * 24 * 7));
+                if (currentWeek > 40) currentWeek = 40;
+                if (currentWeek < 1) currentWeek = 1;
+                
+                const weekDisplay = document.getElementById('current-week-display');
+                if(weekDisplay) {
+                    weekDisplay.classList.remove("text-slate-300", "bg-slate-800", "border-slate-700");
+                    weekDisplay.classList.add("text-neonGreen", "bg-green-900/20", "border-green-900");
+                    weekDisplay.innerText = `الأسبوع ${currentWeek} من 40`;
+                }
+
+                // Check if finished
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    updateDisplay("00", "00", "00", "00", "00");
+                    document.getElementById("progress-text").innerText = "تم الوصول للهدف!";
+                    document.getElementById("progress-bar").style.width = "100%";
+                    weekDisplay.innerText = "تم الانتهاء";
+                    return;
+                }
+
+                updateDisplay(weeks, days, hours, minutes, seconds);
+
+                // Progress Bar
+                const totalDuration = TOTAL_DAYS * 24 * 60 * 60 * 1000;
+                let percentage = (timeElapsed / totalDuration) * 100;
+                if(percentage < 1) percentage = 1;
+                if(percentage > 100) percentage = 100;
+
+                document.getElementById("progress-bar").style.width = percentage + "%";
+                document.getElementById("progress-text").innerText = percentage.toFixed(2) + "% من الرحلة";
+
+            }, 1000);
+        }
+
+        function updateDisplay(w, d, h, m, s) {
+            document.getElementById("weeks").innerText = w < 10 ? "0" + w : w;
+            document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+            document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+            document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+            document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+        }
+
+        initTimer();
+    </script>
+</body>
+</html>
