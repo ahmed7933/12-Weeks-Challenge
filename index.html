@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10 Weeks Challenge for 12 Kg Loss and Be 120 Kg</title>
+    <title>10 Weeks Challenge - Lose 12 Kg</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,8 +75,9 @@
 
     <nav class="w-full bg-card/80 backdrop-blur-md border-b border-slate-700 fixed top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- تم تعديل العنوان هنا -->
             <div class="text-xl font-bold text-neonOrange flex items-center gap-2">
-                <i class="fa-solid fa-heart-pulse"></i> 10 Weeks Challenge to Be 120 Kg
+                <i class="fa-solid fa-heart-pulse"></i> 10 Weeks Challenge
             </div>
             <div class="flex gap-3 items-center">
                 <div id="current-week-display" class="hidden md:block text-sm font-bold text-slate-300 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
@@ -109,7 +110,8 @@
             <div class="grid grid-cols-3 md:grid-cols-5 gap-3 max-w-4xl mx-auto mb-8">
                 <div class="bg-card border border-slate-700 p-3 rounded-xl glow-effect relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-1 bg-neonOrange"></div>
-                    <div id="weeks" class="text-3xl md:text-4xl font-bold text-white">40</div>
+                    <!-- تم تعديل الرقم الظاهري للأسابيع -->
+                    <div id="weeks" class="text-3xl md:text-4xl font-bold text-white">10</div>
                     <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest">أسبوع متبقي</div>
                 </div>
                 
@@ -315,42 +317,6 @@
         </div>
     </section>
 
-    <section class="py-16 bg-slate-800">
-        <div class="container mx-auto px-4 max-w-5xl">
-            <h2 class="text-3xl font-bold mb-12 text-center">خارطة الطريق (40 أسبوع)</h2>
-            <div class="relative border-r-4 border-slate-700 mr-4 space-y-12">
-                <div class="relative pr-8">
-                    <div class="absolute -right-[22px] top-0 w-10 h-10 bg-slate-900 border-4 border-neonOrange rounded-full flex items-center justify-center text-neonOrange font-bold">1</div>
-                    <div class="bg-card p-6 rounded-xl border border-slate-700">
-                        <h3 class="text-xl font-bold text-white">المرحلة الأولى: التأسيس (الأسابيع 1-10)</h3>
-                        <p class="text-slate-400 mt-2">الهدف: خسارة 10-12 كجم. التركيز: منع أكل الشارع نهائياً والالتزام باللانش بوكس.</p>
-                    </div>
-                </div>
-                <div class="relative pr-8">
-                    <div class="absolute -right-[22px] top-0 w-10 h-10 bg-slate-900 border-4 border-slate-600 rounded-full flex items-center justify-center text-slate-400 font-bold">2</div>
-                    <div class="bg-card p-6 rounded-xl border border-slate-700 opacity-80">
-                        <h3 class="text-xl font-bold text-white">المرحلة الثانية: زيادة الحرق (الأسابيع 11-20)</h3>
-                        <p class="text-slate-400 mt-2">الهدف: خسارة 8-10 كجم. تقليل نشويات الغداء، زيادة شدة التمرين بالشنطة.</p>
-                    </div>
-                </div>
-                <div class="relative pr-8">
-                    <div class="absolute -right-[22px] top-0 w-10 h-10 bg-slate-900 border-4 border-slate-600 rounded-full flex items-center justify-center text-slate-400 font-bold">3</div>
-                    <div class="bg-card p-6 rounded-xl border border-slate-700 opacity-60">
-                        <h3 class="text-xl font-bold text-white">المرحلة الثالثة: كسر الثبات (الأسابيع 21-30)</h3>
-                        <p class="text-slate-400 mt-2">صيام متقطع + تمارين HIIT في الأجازات لكسر ثبات الوزن.</p>
-                    </div>
-                </div>
-                <div class="relative pr-8">
-                    <div class="absolute -right-[22px] top-0 w-10 h-10 bg-slate-900 border-4 border-slate-600 rounded-full flex items-center justify-center text-slate-400 font-bold">4</div>
-                    <div class="bg-card p-6 rounded-xl border border-slate-700 opacity-60">
-                        <h3 class="text-xl font-bold text-white">المرحلة الرابعة: النحت (الأسابيع 31-40)</h3>
-                        <p class="text-slate-400 mt-2">الوصول لـ 90 كجم. تقليل الملح، تمارين البطن المكثفة.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer class="bg-slate-950 py-8 text-center border-t border-slate-800">
         <div class="container mx-auto px-4">
             <p class="text-slate-500 text-sm">
@@ -385,11 +351,11 @@
             }
         }
 
-        // --- Logic 2: Fixed Date Countdown (Starts Nov 22, 2025) ---
+        // --- Logic 2: Fixed Date Countdown (Starts Nov 29, 2025) ---
         
-        // CONFIG: Saturday, Nov 22, 2025 at 00:00:00
-        const START_DATE_STR = "2025-11-22T00:00:00"; 
-        const TOTAL_DAYS = 280; // 40 weeks
+        // CONFIG: Saturday, Nov 29, 2025 at 00:00:00
+        const START_DATE_STR = "2025-11-29T00:00:00"; 
+        const TOTAL_DAYS = 70; // تم التعديل ليكون 10 أسابيع (70 يوم)
 
         function initTimer() {
             const startTime = new Date(START_DATE_STR).getTime();
@@ -408,8 +374,8 @@
                     const s = Math.floor((timeUntilStart % (1000 * 60)) / 1000);
 
                     // Display "Waiting" state
-                    document.getElementById("weeks").innerText = "40"; // Full duration
-                    // Show countdown to START in the small boxes (optional) or just keep 00
+                    document.getElementById("weeks").innerText = "10"; // مدة التحدي الجديدة
+                    
                     document.getElementById("days").innerText = d;
                     document.getElementById("hours").innerText = h;
                     document.getElementById("minutes").innerText = m;
@@ -440,14 +406,14 @@
 
                 // 2. Current Week Logic
                 let currentWeek = Math.ceil(timeElapsed / (1000 * 60 * 60 * 24 * 7));
-                if (currentWeek > 40) currentWeek = 40;
+                if (currentWeek > 10) currentWeek = 10; // تعديل الحد الأقصى
                 if (currentWeek < 1) currentWeek = 1;
                 
                 const weekDisplay = document.getElementById('current-week-display');
                 if(weekDisplay) {
                     weekDisplay.classList.remove("text-slate-300", "bg-slate-800", "border-slate-700");
                     weekDisplay.classList.add("text-neonGreen", "bg-green-900/20", "border-green-900");
-                    weekDisplay.innerText = `الأسبوع ${currentWeek} من 40`;
+                    weekDisplay.innerText = `الأسبوع ${currentWeek} من 10`; // تعديل العرض
                 }
 
                 // Check if finished
@@ -485,6 +451,4 @@
         initTimer();
     </script>
 </body>
-
 </html>
-
