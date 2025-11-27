@@ -60,8 +60,15 @@
             0%, 100% { box-shadow: 0 0 10px rgba(249, 115, 22, 0.2); }
             50% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.5); }
         }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .glow-effect {
             animation: pulse-glow 2s infinite;
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
         }
 
         .gradient-text {
@@ -93,6 +100,26 @@
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-neonBlue/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
 
         <div class="relative z-10 container mx-auto max-w-4xl">
+            
+            <!-- عبارة التحفيز الجديدة -->
+            <div class="mb-10 animate-fade-in-up">
+                <div class="relative inline-block">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-neonOrange to-neonBlue rounded-lg blur opacity-25"></div>
+                    <div class="relative bg-slate-900 ring-1 ring-slate-900/5 rounded-lg leading-none flex items-top justify-start space-x-6 p-6 md:p-8 border-r-4 border-neonOrange">
+                        <div class="text-right">
+                            <p class="text-white font-bold text-xl md:text-3xl leading-relaxed">
+                                <i class="fa-solid fa-quote-right text-neonOrange text-2xl ml-2 opacity-80"></i>
+                                لا تتوقف عندما تتعب، <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonOrange to-yellow-400 font-black">توقف عندما تنتهي!</span>
+                                <br>
+                                <span class="text-slate-400 text-lg md:text-xl font-normal mt-2 block">
+                                    أنت لا تخسر وزناً.. أنت تستعيد حياتك، وتصنع النسخة الأقوى منك.
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <span class="inline-block py-1 px-3 rounded-full bg-slate-800 border border-slate-700 text-neonOrange text-sm font-semibold mb-4">
                 تحدي الـ 10 أسابيع (70 يوم)
             </span>
@@ -108,10 +135,10 @@
                 <span>بداية التحدي: السبت 29/11/2025</span>
             </div>
 
-            <div class="grid grid-cols-3 md:grid-cols-5 gap-3 max-w-4xl mx-auto mb-8">
+            <!-- تم تعديل الشبكة لتكون 3 أعمدة فقط وحذف الدقائق والثواني -->
+            <div class="grid grid-cols-3 gap-3 max-w-2xl mx-auto mb-8">
                 <div class="bg-card border border-slate-700 p-3 rounded-xl glow-effect relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-1 bg-neonOrange"></div>
-                    <!-- تم تعديل الرقم الظاهري للأسابيع -->
                     <div id="weeks" class="text-3xl md:text-4xl font-bold text-white">10</div>
                     <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest">أسبوع متبقي</div>
                 </div>
@@ -124,16 +151,6 @@
                 <div class="bg-card border border-slate-700 p-3 rounded-xl">
                     <div id="hours" class="text-3xl md:text-4xl font-bold text-white">00</div>
                     <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest">ساعة</div>
-                </div>
-
-                <div class="bg-card border border-slate-700 p-3 rounded-xl">
-                    <div id="minutes" class="text-3xl md:text-4xl font-bold text-white">00</div>
-                    <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest">دقيقة</div>
-                </div>
-
-                <div class="bg-card border border-slate-700 p-3 rounded-xl border-neonOrange/30">
-                    <div id="seconds" class="text-3xl md:text-4xl font-bold text-neonOrange font-mono">00</div>
-                    <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest">ثانية</div>
                 </div>
             </div>
 
@@ -424,16 +441,12 @@
                     const timeUntilStart = startTime - now;
                     const d = Math.floor(timeUntilStart / (1000 * 60 * 60 * 24));
                     const h = Math.floor((timeUntilStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const m = Math.floor((timeUntilStart % (1000 * 60 * 60)) / (1000 * 60));
-                    const s = Math.floor((timeUntilStart % (1000 * 60)) / 1000);
-
+                    
                     // Display "Waiting" state
                     document.getElementById("weeks").innerText = "10"; // مدة التحدي الجديدة
                     
                     document.getElementById("days").innerText = d;
                     document.getElementById("hours").innerText = h;
-                    document.getElementById("minutes").innerText = m;
-                    document.getElementById("seconds").innerText = s;
                     
                     document.getElementById("progress-bar").style.width = "0%";
                     document.getElementById("progress-text").innerText = `يبدأ التحدي بعد ${d} يوم و ${h} ساعة`;
@@ -455,8 +468,6 @@
                 const weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
                 const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                 // 2. Current Week Logic
                 let currentWeek = Math.ceil(timeElapsed / (1000 * 60 * 60 * 24 * 7));
@@ -473,14 +484,14 @@
                 // Check if finished
                 if (distance < 0) {
                     clearInterval(timerInterval);
-                    updateDisplay("00", "00", "00", "00", "00");
+                    updateDisplay("00", "00", "00");
                     document.getElementById("progress-text").innerText = "تم الوصول للهدف!";
                     document.getElementById("progress-bar").style.width = "100%";
                     weekDisplay.innerText = "تم الانتهاء";
                     return;
                 }
 
-                updateDisplay(weeks, days, hours, minutes, seconds);
+                updateDisplay(weeks, days, hours);
 
                 // Progress Bar
                 const totalDuration = TOTAL_DAYS * 24 * 60 * 60 * 1000;
@@ -494,12 +505,10 @@
             }, 1000);
         }
 
-        function updateDisplay(w, d, h, m, s) {
+        function updateDisplay(w, d, h) {
             document.getElementById("weeks").innerText = w < 10 ? "0" + w : w;
             document.getElementById("days").innerText = d < 10 ? "0" + d : d;
             document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
-            document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
-            document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
         }
 
         initTimer();
