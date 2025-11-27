@@ -75,9 +75,10 @@
 
     <nav class="w-full bg-card/80 backdrop-blur-md border-b border-slate-700 fixed top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <!-- تم تعديل العنوان هنا -->
+            <!-- تم إضافة dir="ltr" للنص ليظهر الترتيب بشكل صحيح -->
             <div class="text-xl font-bold text-neonOrange flex items-center gap-2">
-                <i class="fa-solid fa-heart-pulse"></i> 10 Weeks Challenge
+                <i class="fa-solid fa-heart-pulse"></i> 
+                <span dir="ltr">10 Weeks Challenge</span>
             </div>
             <div class="flex gap-3 items-center">
                 <div id="current-week-display" class="hidden md:block text-sm font-bold text-slate-300 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
@@ -201,55 +202,48 @@
 
             <div id="content-morning" class="space-y-4 animate-fade-in">
                 <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-neonOrange">
-                    <div class="text-neonOrange font-mono font-bold text-lg min-w-[60px]">07:00</div>
+                    <div class="text-neonOrange font-mono font-bold text-lg min-w-[60px]">10:00</div>
                     <div>
-                        <h4 class="font-bold text-white">الفطار في البيت</h4>
-                        <p class="text-slate-400 text-sm">نص رغيف + فول/جبنة + شاي (سكر خفيف).</p>
+                        <h4 class="font-bold text-white">الوجبة الأولى</h4>
+                        <p class="text-slate-400 text-sm">رغيف فول وطعمية صغير (400 كالوري).</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-yellow-500">
-                    <div class="text-yellow-500 font-mono font-bold text-lg min-w-[60px]">Work</div>
+                    <div class="text-yellow-500 font-mono font-bold text-lg min-w-[60px]">15:00</div>
                     <div>
-                        <h4 class="font-bold text-white">الغداء (اللانش بوكس)</h4>
-                        <p class="text-slate-400 text-sm">6 معالق رز/مكرونة + خضار مطبوخ + بروتين/بقوليات.</p>
+                        <h4 class="font-bold text-white">الوجبة الثانية</h4>
+                        <p class="text-slate-400 text-sm">10 معالق ارز + خضار + بروتين (600 كالوري) أو نفس الوجبة الأولى أو شئ يساوي 600 كالوري.</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-blue-500">
                     <div class="text-blue-500 font-mono font-bold text-lg min-w-[60px]">21:00</div>
                     <div>
-                        <h4 class="font-bold text-white">العشاء</h4>
-                        <p class="text-slate-400 text-sm">زبادي أو جبنة قريش + سلطة (بدون عيش).</p>
+                        <h4 class="font-bold text-white">الوجبة الثالثة</h4>
+                        <p class="text-slate-400 text-sm">10 معالق ارز + خضار + بروتين (600 كالوري) أو نفس الوجبة الأولى أو شئ يساوي 600 كالوري.</p>
                     </div>
                 </div>
             </div>
 
             <div id="content-night" class="space-y-4 hidden animate-fade-in">
                 <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-neonBlue">
-                    <div class="text-neonBlue font-mono font-bold text-lg min-w-[60px]">16:00</div>
+                    <div class="text-neonBlue font-mono font-bold text-lg min-w-[60px]">17:00</div>
                     <div>
-                        <h4 class="font-bold text-white">الاستيقاظ والفطار</h4>
-                        <p class="text-slate-400 text-sm">نص رغيف + فول/جبنة + سلطة.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-neonOrange">
-                    <div class="text-neonOrange font-mono font-bold text-lg min-w-[60px]">19:00</div>
-                    <div>
-                        <h4 class="font-bold text-white">الغداء الرئيسي (البيت)</h4>
-                        <p class="text-slate-400 text-sm">الوجبة الكبيرة: رز/مكرونة + خضار + بروتين.</p>
+                        <h4 class="font-bold text-white">الوجبة الأولى</h4>
+                        <p class="text-slate-400 text-sm">10 معالق ارز + خضار + بروتين (600 كالوري) أو شئ يساوي 600 كالوري.</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-purple-500">
-                    <div class="text-purple-500 font-mono font-bold text-lg min-w-[60px]">Work</div>
+                    <div class="text-purple-500 font-mono font-bold text-lg min-w-[60px]">00:00</div>
                     <div>
-                        <h4 class="font-bold text-white">سناك نص الليل</h4>
-                        <p class="text-slate-400 text-sm"><span class="text-red-400 font-bold">ممنوع النشويات!</span> خضار مقطع، جبنة، أو بيض.</p>
+                        <h4 class="font-bold text-white">الوجبة الثانية</h4>
+                        <p class="text-slate-400 text-sm">10 معالق ارز + خضار + بروتين (600 كالوري) أو نفس الوجبة الأولى أو شئ يساوي 600 كالوري.</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4 bg-card p-4 rounded-xl border-r-4 border-green-500">
                     <div class="text-green-500 font-mono font-bold text-lg min-w-[60px]">09:00</div>
                     <div>
-                        <h4 class="font-bold text-white">قبل النوم</h4>
-                        <p class="text-slate-400 text-sm">زبادي أو ثمرة فاكهة -> نوم فوراً.</p>
+                        <h4 class="font-bold text-white">الوجبة الثالثة</h4>
+                        <p class="text-slate-400 text-sm">رغيف فول وطعمية صغير (400 كالوري).</p>
                     </div>
                 </div>
             </div>
@@ -269,48 +263,108 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-lg text-neonGreen">إحماء</h3>
-                        <i class="fa-solid fa-person-walking text-slate-500"></i>
+                <!-- Warm Up -->
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition group text-center">
+                    <div class="h-32 flex items-center justify-center mb-4 bg-slate-800/50 rounded-lg p-2 group-hover:bg-slate-800 transition">
+                        <!-- Running Stick Figure -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20 text-neonGreen">
+                            <circle cx="12" cy="4" r="2" />
+                            <path d="M12 6v4" />
+                            <path d="M12 10l-2 3-3-1" />
+                            <path d="M12 10l2 2 3-2" />
+                            <path d="M12 10l-1 4-3 1" />
+                            <path d="M12 10l2 3 1 4" />
+                            <path d="M4 18l14-4" opacity="0.2" /> <!-- Ground hint -->
+                        </svg>
                     </div>
-                    <p class="text-white text-2xl font-bold">5 دقايق</p>
+                    <h3 class="font-bold text-lg text-white mb-2">إحماء (جري في المكان)</h3>
+                    <p class="text-slate-300 text-xl font-bold">5 دقايق</p>
                 </div>
-                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-lg text-white">Squats (رجل)</h3>
-                        <i class="fa-solid fa-chair text-slate-500"></i>
+
+                <!-- Squats -->
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition group text-center">
+                    <div class="h-32 flex items-center justify-center mb-4 bg-slate-800/50 rounded-lg p-2 group-hover:bg-slate-800 transition">
+                        <!-- Squat Stick Figure -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20 text-neonOrange">
+                            <circle cx="12" cy="4" r="2" />
+                            <path d="M12 6v7" />
+                            <path d="M12 13l-3.5-1-1 5" />
+                            <path d="M12 13l3.5-1 1 5" />
+                            <path d="M12 6l-3 3" />
+                            <path d="M12 6l3 3" />
+                        </svg>
                     </div>
+                    <h3 class="font-bold text-lg text-white mb-2">Squats (رجل)</h3>
                     <p class="text-neonOrange text-2xl font-bold">3 x 12</p>
                 </div>
-                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-lg text-white">Push-ups (صدر)</h3>
-                        <i class="fa-solid fa-hand-fist text-slate-500"></i>
+
+                <!-- Push-ups -->
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition group text-center">
+                    <div class="h-32 flex items-center justify-center mb-4 bg-slate-800/50 rounded-lg p-2 group-hover:bg-slate-800 transition">
+                        <!-- Pushup Stick Figure -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20 text-neonOrange">
+                            <circle cx="19" cy="14" r="2" />
+                            <path d="M17 15l-12 3" />
+                            <path d="M15 15l-1 4" />
+                            <path d="M15 15l1-2" />
+                            <path d="M2 19h20" opacity="0.2" />
+                        </svg>
                     </div>
+                    <h3 class="font-bold text-lg text-white mb-2">Push-ups (صدر)</h3>
                     <p class="text-neonOrange text-2xl font-bold">3 x Max</p>
                 </div>
-                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-lg text-white">Rows (ظهر)</h3>
-                        <i class="fa-solid fa-bottle-water text-slate-500"></i>
+
+                <!-- Rows -->
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition group text-center">
+                    <div class="h-32 flex items-center justify-center mb-4 bg-slate-800/50 rounded-lg p-2 group-hover:bg-slate-800 transition">
+                        <!-- Row Stick Figure (Modified for clarity) -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20 text-neonOrange">
+                            <circle cx="20" cy="5" r="2" /> <!-- Head -->
+                            <path d="M20 7l-8 7" /> <!-- Torso leaning forward -->
+                            <path d="M12 14l0 5l-2 3" /> <!-- Legs bent at knee -->
+                            <path d="M12 14l3 6" /> <!-- Other leg -->
+                            <path d="M16 10l-3 5" /> <!-- Arm reaching down -->
+                            <rect x="11" y="15" width="5" height="4" rx="1" /> <!-- Weight/Bag -->
+                            <path d="M8 15l0-5m-2 2l2-2l2 2" class="text-neonGreen" stroke-width="1.5" /> <!-- Arrow Up indicating motion -->
+                        </svg>
                     </div>
+                    <h3 class="font-bold text-lg text-white mb-2">Rows (ظهر)</h3>
                     <p class="text-neonOrange text-2xl font-bold">3 x 15</p>
-                    <p class="text-slate-400 text-sm">باستخدام زجاجات المياه</p>
+                    <p class="text-slate-400 text-sm">باستخدام شنطة/زجاجات</p>
                 </div>
-                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-lg text-white">Lunges (أرداف)</h3>
-                        <i class="fa-solid fa-shoe-prints text-slate-500"></i>
+
+                <!-- Lunges -->
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition group text-center">
+                    <div class="h-32 flex items-center justify-center mb-4 bg-slate-800/50 rounded-lg p-2 group-hover:bg-slate-800 transition">
+                        <!-- Lunge Stick Figure -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20 text-neonOrange">
+                            <circle cx="12" cy="5" r="2" />
+                            <path d="M12 7v5" /> <!-- Torso -->
+                            <path d="M12 12l-4 3v4" /> <!-- Front Leg -->
+                            <path d="M12 12l4 3v-2" /> <!-- Back Leg -->
+                            <path d="M12 7l-2 3" />
+                            <path d="M12 7l2 3" />
+                        </svg>
                     </div>
+                    <h3 class="font-bold text-lg text-white mb-2">Lunges (أرداف)</h3>
                     <p class="text-neonOrange text-2xl font-bold">3 x 10</p>
                     <p class="text-slate-400 text-sm">لكل رجل</p>
                 </div>
-                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-lg text-white">Plank (بطن)</h3>
-                        <i class="fa-solid fa-stopwatch text-slate-500"></i>
+
+                <!-- Plank -->
+                <div class="bg-card border border-slate-700 p-5 rounded-xl hover:bg-slate-700 transition group text-center">
+                    <div class="h-32 flex items-center justify-center mb-4 bg-slate-800/50 rounded-lg p-2 group-hover:bg-slate-800 transition">
+                        <!-- Plank Stick Figure -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20 text-neonOrange">
+                            <circle cx="18" cy="12" r="2" />
+                            <path d="M16 13L5 15" /> <!-- Body -->
+                            <path d="M5 15l-1 2" /> <!-- Feet -->
+                            <path d="M16 13l-1 4" /> <!-- Arm support -->
+                            <path d="M15 17h4" /> <!-- Forearm on ground -->
+                            <path d="M2 17h20" opacity="0.2" />
+                        </svg>
                     </div>
+                    <h3 class="font-bold text-lg text-white mb-2">Plank (بطن)</h3>
                     <p class="text-neonOrange text-2xl font-bold">3 x 20s</p>
                 </div>
             </div>
